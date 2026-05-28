@@ -1,0 +1,24 @@
+citHeader("To cite package 'difR' in publications use:")
+
+bibentry(
+  bibtype = "Article",
+  title = "A general framework and an R package for the detection of dichotomous differential item functioning",
+  author = c(
+    person("D.", "Magis"),
+    person("S.", "Beland"),
+    person("F.", "Tuerlinckx"),
+    person("P.", "De Boeck")
+  ),
+  journal = "Behavior Research Methods",
+  year = "2010",
+  volume = "42",
+  pages = "847--862",
+  textVersion = paste(
+    "D. Magis, S. Beland, F. Tuerlinckx, P. De Boeck (2010).",
+    "A general framework and an R package for the detection of dichotomous differential item functioning.",
+    "Behavior Research Methods, 42, 847–862."
+  )
+)
+
+
+

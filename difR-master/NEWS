@@ -1,0 +1,777 @@
+        **************************************************
+        *                                                *
+        *  Changes and Developments in the difR Package  *
+        *                                                *
+        **************************************************
+
+
+
+------------------------------------
+Changes in difR 6.1 (2025-11-25)
+------------------------------------
+
+- Added `ILHTEdif()`, a function for the detection of DIF with the Item-level heterogeneous treatment effects (IL-HTE) mixed model (Gilbert, 2024).
+- Added `Continuous()` and `dfContinuous()` for analyzing DIF in presence of continuous items.
+- Updated of `difLogistic()`, `difMH()`,`difSIBTEST()`, `Logistik()` and `mantelHaenszel()` to incorporate the purification correction by Hladká, Martinková, and Magis (2024).
+- Updated of `LogistikPoly()` and `difPolyLogistic()`.
+- Updated of `liu_agresti_ccor()`.
+- Improvement of the visual output from the LASSO-based functions for DIF detection.
+
+
+------------------------------------
+Changes in difR 6.0 (2025-05-11)
+------------------------------------
+
+New functions:
+- Added `SimPolyDif()` and `SimDichoDif()` for simulating polytomous and dichotomous item responses with DIF.
+- Added `difQuade()` for detecting DIF in ordinal items using Quade-type concordance indices (e.g., Goodman & Kruskal’s gamma, Kendall’s tau-a, Somers’ dyx).
+- Added `Mantel.poly()` for detecting DIF in polytomous items using Mantel (1963).
+- Introduced `LogistikPoly()` and `difPolyLogistic()` for ordinal logistic regression DIF detection (Zumb, 1999), with support for purification and flexible matching.
+- Added `liu_agresti_ccor()` for computing the Liu & Agresti (1996) ordinal index.
+- Integrated a suite of LASSO-based functions for DIF detection in dichotomous items (Magis et al., 2015):
+  - `lassoDIF()`, `lassoDIF.ABWIC()`, `lassoDIF.CV()`, and `lassoDIF.coef()`.
+
+Enhancements:
+- Matching using the **restscore** is now supported in: `difQuade()`, `Mantel.poly()`, `LogistikPoly()`, `difPolyLogistic()`, as well as in updated versions of `difMH()` and `difLogistic()`.
+- Added new `plot()` and `print()` S3 methods for objects returned by `difQuade()` and `difPolyLogistic()` (class `"Logistic"`).
+- Improved modular structure and simulation capabilities to facilitate validation and comparison of DIF detection methods.
+
+
+------------------------------------
+- Changes in difR 5.1 (2020-05-10) -
+------------------------------------
+
+MAJOR UPDATES
+
+  o  Option REML=FALSE as removed from LRT() function 
+     for compatibility.
+
+
+------------------------------------
+- Changes in difR 5.0 (2018-05-08) -
+------------------------------------
+
+MAJOR UPDATES
+
+  o  The SIBTEST method is now available. It is 
+     implemented through the 'sibTest()' and 
+     'difSIBTEST()' functions that work similarly to
+     other DIF methods. These functions call the
+     'SIBTEST()' function from package 'mirt' (Chalmers,
+     2012).
+
+  o  Functions 'selectDif()' and 'dichoDif()' were 
+     updated accordingly.
+
+  o  All 'dif...()' functions return now an additional
+     argument called 'p.value' that directly provides
+     the p-values of the selected DIF method. This is
+     to simplify the extraction of the results for 
+     e.g., simulation studies. Many thanks to Phil
+     Chalmers (University fo Georgia, Athens, GA;
+     rphilip.chalmers@gmail.com) for suggesting this
+     improvement. See other poins below.
+
+  o  For 'difMH()' function, the $p.value output
+     argument replaces the former $Pval argument (which
+     was returned for exact MH statistic only).
+
+  o  For 'difStd()' function, the $p.value output
+     argument is not added since the DIF statistic has
+     no known NULL distribution.
+
+  o  The 'difTID()' function has been thoroughly 
+     rewritten in order to call the 'deltaPlot()' 
+     function from package 'deltaPlotR' instead, as it
+     is more complete than the former 'difTID()' 
+     function.
+
+  o  Consequently, the 'trItemDiff()' function was
+     removed and functions 'selectDif()' and 
+     'dichoDif()' were updated.
+
+
+
+MINOR UPDATES
+
+  o  DOI numbers were added to the references.
+
+  o  Some typos were fixed.
+
+
+
+------------------------------------
+- Changes in difR 4.8 (2018-04-28) -
+------------------------------------
+
+MAJOR UPDATES
+
+  o  The functions 'mantelHaenszel()', 'breslowDay()',
+     'genMantelHaenszel()', 'stdPDIF()', 'difMH()', 
+     'difBD()', 'difGMH()', 'difStd()', 'selectDif()',
+     'selectGenDif()', 'dichoDif()' and 'genDichoDif()'
+     were updated to allow the definition of the 
+     matching criterion from an external variable 
+     instead of the test score. This is specified 
+     through the new 'match' argument.
+
+
+MINOR UPDATES
+
+  o  Affiliations and email addresses were updated.
+
+  o  Some typos were fixed.
+
+
+
+
+------------------------------------
+- Changes in difR 4.7 (2016-11-22) -
+------------------------------------
+
+MAJOR UPDATES
+
+  o  The license for 'difR' package was updated to a
+     GPL license.
+
+  o  Adjustement for multiple comparisons are now 
+     available for all DIF methods, except 'difStd()'
+     (standardized-P-DIF) and 'difTID()' (Transformed 
+     Item Difficulties). The argument 'p.adjust.method' 
+     was added to specify which adjustment to apply 
+     (e.g., "BH" for Benjamini-Hochberg). Adjusted 
+     p-values are then returned and DIF identification
+     is based on these adjusted p-values. Note that 
+     methods 'difStd()' and 'difTID()' do not return
+     p-values from null statistical distributions and
+     can therefore ot be updated for multiple 
+     comparisons. Many thanks to Patricia Martinkova
+     (Czech Academy of Sciences, Prague, Czech Republic; 
+     martinkova@cs.cas.cz) for suggesting this improvement.
+
+  o  The functions 'selectDif()', 'selectGenDif()',
+     'dichoDif()' and 'genDichoDif()' were updated
+     accordingly. 
+
+  o  The 'Logistik()' function returns now in addition 
+     the matrices 'seM0' and 'seM1' with the standard
+     error values of the parameter estimates in 'parM0'
+     and 'parM1' matrices (with the same format). 
+
+  o  The 'difLogistic()' function returns now in addition 
+     the matrices 'logitSe', wth the standard error values
+     of the parameters hold in matrix 'logitPar', as well
+     as matrix 'seM0' from the output of 'Logistik()' 
+     function. 
+
+  o  The functions 'Logistik()' and 'difLogistic()' have
+     a new argument 'all.cov' to specify whether all 
+     covariance matrices of model parameters should be 
+     returned (as lists), for both nested models and all 
+     items. Returned arguments are called 'cov.M0' and
+     'cov.M1'. Default is FALSE so these lists are 
+     returned as NULL values.
+     
+
+
+MINOR UPDATES
+
+  o  A minor bug was fixed in the 'print.Lord' method. 
+     When the 3PL was used with fixed guessing parameter,
+     the 'print.Lord' function was reporting p-values 
+     computed with 3 degrees of freedom, while in this
+     case it should be 2 degrees of freedom. Many thanks
+     to Patricia Martinkova (Czech Academy of Sciences,
+     Prague, Czech Republic; martinkova@cs.cas.cz) for
+     noticing this issue.
+
+  o  A minor bug was fixed in the 'difMH' method. In case
+     of item purification with asymptotic (not exact)
+     statistics, the DIF detection threshold returned by
+     the function was always the one from the chi-square
+     distrib ution, even when the 'logOR' statistic was
+     used (the computations were however correct).
+
+  o  The CITATION file was updated.
+
+  o  Several typos were fixed.
+
+
+
+------------------------------------
+- Changes in difR 4.6 (2015-04-29) -
+------------------------------------
+
+MAJOR UPDATES
+
+  o  The 'Logistik' function was rewritten. It now allows
+     to specify a matching criterion that is not the test
+     score (through the 'match' argument). It also permits
+     to specify a continuous group membership variable 
+     instead of a binary group membership. This is done by
+     the 'member.type' argument. Finally, the item 
+     responses are directly modeled in the logistic 
+     regression, not as a two-way table anymore. This is 
+     to fix an issue related to the computation of
+     Nagelkerke's R^2 coefficients (which are now returned 
+     separately for the two fitted models). Many thanks to
+     Bruno Facon (Department of Psychology, Universite 
+     Lille-Nord de France, France) for noticing this issue.
+
+  o  Similarly, the 'genLogistik' function was rewritten.
+     It now allows to specify a matching criterion that is
+     not the test score (through the 'match' argument). 
+     Also, the item responses are directly modeled in the  
+     logistic regression, not as a two-way table anymore. 
+     Nagelkerke's R^2 coefficients are also now returned 
+     separately for the two fitted models. 
+
+  o  The 'difLogReg' function was created as a meta-function
+     for logistic regression DIF analysis. It encompasses 
+     all options from 'difLogistic' and 'difGenLogistic'
+     and returns the corresponding output for simplicity of
+     use.
+
+  o  The 'difLogistic', 'difGenlogistic', 'selectDif',
+     'selectGenDif', 'dichoDif' and 'genDichoDif' functions 
+     were updated according to the previous modifications.
+
+  o  The 'difMH', 'difStd', 'difBD', 'difTID', 'difLogistic', 
+     'difGMH', 'difGenLogistic', 'difLogReg', 'difLord',
+     'difRaju' and 'difGenLord' methods now allow specifying
+     a set of anchor items (that are assumed to be DIF-free 
+     by the user). The 'anchor' argument was added. If 
+     supplied, anchor items are used to compute the test 
+     score together with the tested item) and anchor items 
+     are not tested for DIF. Item purification is disabled if 
+     anchor items are provided.
+
+ o   The functions 'selectDif', 'selectGenDif', 'dichoDif' 
+     and 'genDichoDif' have been updated with the 'anchor' 
+     argument.
+
+
+MINOR UPDATES
+
+  o  The DESCRIPTION file was updated to meet CRAN policy.
+
+  o  Several typos were fixed.
+
+
+------------------------------------
+- Changes in difR 4.5 (2013-04-07) -
+------------------------------------
+
+MAJOR UPDATES
+
+  o  In the 'itemPar2PL', 'itemPar3PL' and 'itemPar3PLconst'     
+     functions, the extraction of the standard errors and 
+     covariances between the item parameters was not 
+     performed accurately from the output of the 'ltm' and
+     'tpm' functions. Actually, the values were extracted
+     from the linear parametrization of the model, not from
+     its IRT form. This was corrected by an appropriate  
+     application of the Delta method. A note was also added
+     in the 'difR/doc' folder with mathematical details and
+     notations for the Delta method. Many thanks to Emily
+     Price (Department of Educational Research and Evaluation,   
+     Ohio University) for noticing this issue, and to Dimitris
+     Rizopoulos (Erasmus University Rotterdam, The Netherlands) 
+     for providing key information to fix this problem.
+
+
+MINOR UPDATES
+
+  o  The authors' affiliations were updated.
+
+  o  Several typos were fixed.
+
+
+------------------------------------
+- Changes in difR 4.4 (2013-01-29) -
+------------------------------------
+
+MINOR UPDATES
+
+  o  The 'mantelHaenszel' function was updated to avoid a
+     technical issue that was occuring in extreme cases. 
+     When all items but one are flagged as DIF, and item
+     purification process is run, then 'mantelHaenszel' was
+     trying to compute 'rowSums' on a vector and not on a 
+     one-column matrix, thus leading to an error. This was
+     fixed. Many thanks to Yung Chih Ou (Department of 
+     Educational Psychology and Counseling, National Taiwan
+     Normal University) for noticing this issue.
+
+
+------------------------------------
+- Changes in difR 4.3 (2012-06-13) -
+------------------------------------
+
+MINOR UPDATES
+
+  o  The computation of the R^2 coefficients in the 
+     'Logistik' function was slightly modified to overcome
+     a mathematical issue. With large data sets, the null 
+     and model deviances are very large and the ratio of    
+     exponentials of the deviances might return NaN values
+     and affect the output of the 'difLogistic'. Many thanks
+     to Marco Pomati (University of Bristol, UK) for 
+     noticing this issue.
+
+ o  Several typos were fixed.
+
+
+------------------------------------
+- Changes in difR 4.2 (2012-04-01) -
+------------------------------------
+
+MAJOR UPDATES
+
+  o  The Raju method was improved. Two ways of computing
+     the area between the ICC are available: the "unsigned" 
+     one and the "signed" one. See Raju (1990) for further
+     details. Both the 'RajuZ' and the 'difRaju' have now
+     an additional 'signed' logical argument to select
+     which type of area to compute. Many thanks to Dylan
+     Molenaar (Department of Psychology, University of
+     Amsterdam, The Netherlands) for noticing this
+     alternative.
+
+  o  Because of the previous update, the functions 'difRaju',
+     'plot.Raj', 'selectDif' and 'dichoDif' were updated.
+
+  o  The exact Mantel-Haenszel test can now be carried out.
+     The argument 'exact' was added to the 'mantelHaenszel'
+     function. By default, the asymptotic test (Holland and
+     Thayer, 1988) is performed.
+
+  o  Because of the previous update, the functions 'difMH',
+     'plot.MH', 'print.MH', 'selectDif' and 'dichoDif' were
+     updated.                                                                                                                  
+
+
+MINOR UPDATES
+
+  o  The difR package was updated to compile under versions
+     2.14.0 and later of R.
+ 
+  o  Several typos were fixed.
+
+
+------------------------------------
+- Changes in difR 4.1 (2011-06-22) -
+------------------------------------
+
+MINOR UPDATE
+
+  o  The R code used in 'mantelHaenszel' and 'difMH' 
+     functions was modified to overcome a technical issue.
+     With some large data sets, the computation of MH DIF
+     statistics was impossible due to integer overflow. The
+     'mantelHaenszel' function was then returning NA values,
+     'difMH' was stopping with an error message because of 
+     these NAs. The R code was modified to avoid integer
+     overeflow and ensure stable computation of MH DIF
+     statistics. Many thanks to Shih-Ying Yao (University
+     of California - Berkeley) for noticing this issue and
+     helping in solving it.
+
+
+------------------------------------
+- Changes in difR 4.0 (2011-03-04) -
+------------------------------------
+
+MAJOR UPDATES
+
+  o  An important mistake in the R code has been fixed. Under
+     the 3PL model, Lord's chi-squared statistics were 
+     were wrongly computed (see the 'LordChi2' help file for
+     further details). This has now been fixed. Many thanks
+     to J. Patrick Meyer (Curry School of Education, 
+     University of Virginia) for having discovered this
+     mistake.
+
+  o  The non-IRT methods of TID, Mantel-Haenszel, Breslow-
+     Day, standardization and generalized Mantel-Haenszel
+     can now handle data sets with missing values. They must
+     be coded as NA values into the data set. Basically, 
+     they are withdrawn from the computation of sum-scores.
+
+  o  The non-IRT methods of logistic regression and
+     generalized logistic regression can now handle data sets
+     with missing values. They must be coded as NA values
+     into the data set. Basically, they are withdrawn from
+     the computation of sum-scores and the fitting of
+     logistic models.
+
+  o  The IRT methods of Lord, Raju, LRT and generalized Lord
+     can now handle data sets with missing values, as both 
+     'ltm' and 'lme4' support for missing data. They must
+     be coded as NA values into the data set. They are 
+     withdrawn from the fitting of the IRT models.
+
+  o  The Transformed Item Difficulties (TID) method, also
+     known as Angoff's Delta method, is now available. The
+     function 'trItemDiff' computes the perpendicular 
+     distances and the 'difTID' function returns the full
+     output, similarly to other DIF methods.
+
+  o  An effect size measure has been added for the Lord and 
+     Raju methods when the 1PL model is used. It is based 
+     on the difference in item difficulties. See the help
+     files of the methods 'difLord' and 'difRaju'.
+
+  o  The 'itemPar1PL' has a new argument, called 'discr', to
+     fix the common discrimination parameter. By default it
+     is equal to 1, and can be changed to any other value.
+     Alternatively, fixing it to 'NULL' will lead to the
+     estimation of this common parameter (only with the 'ltm'
+     package).
+
+  o  The 'difLogistic' and 'difGenLogistic' functions return
+     now the fitted parameters of the null model M_0 (see 
+     the help file for details on this null model). This is
+     to propose other graphical displays of the item curves
+     (see below).
+
+  o  The 'plot.Logistic' and 'plot.genLogistic' functions
+     have been updated. The new argument 'itemFit' permits
+     to select whether the item curves are displayed
+     according to the best model (i.e. model M_0 if the item
+     is flagged as DIF and model M_1 otherwise) or the null
+     model (i.e. M_0).
+
+
+MINOR UPDATES
+
+  o  The functions 'selectDif' and 'dichoDif' have been 
+     updated to allow for the TID method.
+
+   o The functions 'itemParEst', 'difLord', 'difRaju',
+     'difGenLord', 'selectDif', 'selectGenDif', 'dichoDif'
+     and 'genDichoDif' have been updated to incorporate the
+     new 'discr' argument of 'itemPar1PL' function.
+
+  o  The former argument 'thr' of 'difStd' method has been
+     renamed to 'thrSTD', as there is now an equivalent one
+     for the TID method that is called 'thrTID'.
+
+  o  The 'plot.Logistic' and 'plot.Lord' functions have a new
+     argument, called 'group.names', to provide the names of
+     the reference and focal group for the legend.
+
+  o  The 'plot.genLogistic' and 'plot.GenLord' functions have
+     a new argument, called 'ref.name', to provide the name
+     of the reference group for the legend.
+
+  o  The help files have been checked, typos have been fixed
+     and some descriptions have been rewritten for sake of
+     consistency.
+
+  o  The 'print.dichoDif' function has been slightly
+     modified: the DIF methods are now printed as a list and
+     not one after each other.
+
+  o  A minor bug was fixed in the 'print.dichoDif' function:
+     options of the Breslow-Day method were printed even
+     when this method was not requested!
+
+
+------------------------------------
+- Changes in difR 3.3 (2010-10-21) -
+------------------------------------
+
+MAJOR UPDATES
+
+  o  It is now possible to capture and save the output of each
+     DIF method directly from the 'dif...' functions. The 
+     arguments 'save.output' and 'output' control for saving
+     the output (as displayed by the corresponding 'print'
+     function) into a text file, whose name and path are
+     specified within the 'output' argument.
+
+  o  The functions 'selectDif', 'selectGenDif', 'dichoDif'
+     and 'genDichoDif' have been adapted in order to allow
+     for saving their output too
+
+  o  Similarly, the plots drawn from the 'plot' functions can
+     be captured into either PDF or JPEG format, by using the
+     newly added 'save.plot' and 'save.options' arguments.
+     They define the name of the figure, the path where it is
+     saved, and the format of the figure.
+
+  o  In addition, the 'print' functions display a message to
+     specify whether the output was saved (and where the saved
+     file is located) or not, and the 'plot' functions display
+     a message into the R console to specify whether the plot 
+     was not captured, the format is incorrect, or the plot was 
+     captured and where it was stored.
+
+
+MINOR UPDATES
+
+  o  Several help files have been updated to describe the 
+     corresponding 'plot' functions.
+
+  o  Several typos have been fixed.
+
+
+------------------------------------
+- Changes in difR 3.2 (2010-10-04) -
+------------------------------------
+
+MINOR UPDATES
+
+  o  The reference 'Magis, Beland, Tuerlinckx, and De Boeck (in
+     press)' has been updated as the paper is now published. 
+
+  o  Some typos have been fixed. 
+
+
+------------------------------------
+- Changes in difR 3.1 (2010-06-22) -
+------------------------------------
+
+MAJOR UPDATES
+
+  o  The variance of the log odds-ratio statistic (Philips and
+     Holland, 1987) has been added as output of the 'mantelHaenszel'
+     function. 
+
+  o  The 'difMH' method has a new input argument called 'MHstat'. It
+     specifies which DIF statistic must be considered. Default value
+     'MHChisq' sets the chi-square statistic, while 'logOR' imposes
+     the log odds-ratio statistic.
+
+  o  The commands 'print.MH', 'plot.MH', 'selectDif' and 'dichoDif'
+     have been updated according to the changes in the 'difMH'
+     command.
+
+  o  The 'breslowDay' method has a new input argument called 'BDstat'.
+     It specifies which DIF statistic must be considered. Default
+     value 'BD' sets the Breslow-Day statistic as recommended by 
+     Aguerri et al. (2009), while 'trend' imposes the trend test
+     statistic as recommended by Penfield (2003).
+
+  o  The commands 'print.BD', 'selectDif' and 'dichoDif' have been
+     updated according to the changes in the 'difBD' command.
+
+
+MINOR UPDATES
+
+  o  Some typos have been fixed. 
+
+  o  The reference 'Aguerri et al.' in the 'breslowDay' and 'difBD'
+     commands has been updated.
+
+
+------------------------------------
+- Changes in difR 3.0 (2010-04-20) -
+------------------------------------
+
+MAJOR UPDATES
+
+  o  The Wald statistic can now be used to flag items as DIF with
+     both the logistic and the generalized logistic regression
+     method. The new argument 'criterion' permits to select between
+     'LRT', the usual likelihood-ratio test, and 'Wald' for the
+     Wald test. For the latter, an appropriate contrast matrix is
+     built up internally.
+
+  o  The command 'subtestLogistic' has been added to identify DIF
+     items among a subset of groups of examinees, using the output 
+     of the 'difGenLogistic' command and the Wald test. Subtests are
+     performed with appropriate contrast matrices built up 
+     internally.
+
+  o  The standardized P-DIF statistics can now be computed with
+     different weights. The default weights are based on the focal
+     group, but other options are weights based on the reference
+     group or on both groups together. The newly added argument
+     'stdWeight' in the functions 'stdPDIF' and 'difStd'.
+
+  o  A second measure of effect size has been added for the 
+     standardization method. It is a Delta measure, similar to 
+     that of the Mantel-Haenszel method, and is described in Dorans 
+     (1989, p.228, Eqn. 15).
+
+
+MINOR UPDATES
+
+  o  The DESCRIPTION and CITATION files have been updated. 
+
+  o  The help file references have been updated.
+
+  o  Several typos have been fixed in the help files. 
+
+  o  As a consequence of the first aforementioned major update,
+     the first output argument of the 'Logistik' and 'genLogistik'
+     functions, previously called 'deviance', have been renamed to
+     'stat'.
+
+  o  The functions 'selectDif', 'dichoDif', 'selectGenDif' and
+     'genDichoDif' have been updated to incorporate the different
+     changes of this version of difR.
+
+  o  The coding of the effect size, which was previously done by
+     means of star symbols (*, ** and ***), has been replaced by
+     capital letters A, B and C for respectively negligible,
+     moderate and large DIF sizes. This is to match the usual
+     ETS conventions, and the change was made within the functions
+     'difMH', 'difStd', 'difLogistic' and 'difGenLogistic'.
+
+  o  The TODO file has been added as a list of updates or adds-on
+     for further versions of difR.
+
+  o  The general 'difR-package' Rd file has been created. It contains
+     a summary of the difR package, with a list of the methods
+     currently implemented and a list of related references.
+
+
+
+------------------------------------
+- Changes in difR 2.2 (2010-01-23) -
+------------------------------------
+
+MINOR UPDATES
+
+  o  The system files LICENSE and NEWS have been rewritten for an 
+     easier display in Rgui. Several non-ASCII characters have also
+     been removed.
+
+
+
+------------------------------------
+- Changes in difR 2.1 (2010-01-13) -
+------------------------------------
+
+MINOR UPDATES
+
+  o  The file CITATION has been created and added to the difR package.
+
+  o  The display of the output of Mantel-Haenszel, standardization,
+     logistic regression and generalized logistic regression have been
+     slightly modified: the codes for the effect sizes are now 
+     returned as "Effect size codes" and not "Signif. codes" as in the
+     previous version of difR.
+
+  o  Several issues regarding non-ASCII characters in the help files 
+     have been fixed.
+
+ 
+
+------------------------------------
+- Changes in difR 2.0 (2009-12-18) -
+------------------------------------
+
+MAJOR UPDATES
+
+  o  The logistic regression method has been improved. In addition to 
+     the deviance statistics, the function 'Logistik' also returns the
+     fitted parameters of the two nested models which are compared by 
+     means of the likelihood-ratio test. Moreover, the argument 'type'
+     has been added to test either nonuniform ('type="nudif"'), 
+     uniform ('type="udif"') or both DIF effects simultaneously 
+     ('type="both"'). The 'difLogistic' function has been updated 
+     acordingly, and returns the matrix with the fitted parameters of
+     the best model for each item.
+
+  o  The 'plot.Logistic' function has been improved to allow for 
+     plotting the logistic curves of any selected item according to
+     the best model retained in the 'difLogistic' function.
+
+  o  The 'plot.Lord' function has been improved to allow for plotting
+     the item characteristic curves of any selected item, according to
+     the model fitted and the returned item parameter estimates by the
+     'difLord' function.
+
+  o  The 'plot.GenLord' function has been improved to allow for 
+     plotting the item characteristic curves of any selected item, 
+     according to the model fitted and the returned item parameter 
+     estimates by the 'difGenLord' function.
+
+  o  The generalized logistic regression method is now available. It 
+     extends the logistic regression to more than one focal group, by 
+     an appropriate extension of the logistic models and the 
+     comparison of model parameters. The functions 'genLogistik' and 
+     'difGenlogistic' are the corresponding versions of 'Logistik' and
+     'difLogistic' for this generalized method. 
+
+  o  Generalized versions of the functions 'selectDif' and 'dichoDif' 
+     have been developed for comparing the results of the generalized 
+     tests that are currently available (generalized Mantel-Haenszel, 
+     generalized Lord's chi-square test and generalized logistic 
+     regression). These are the 'genSelectDif' and 'genDichoDif' 
+     functions. They operate similarly to their "non-generalized" 
+     versions.
+
+  o  Some measures of effect size are now available. For 
+     Mantel-Haenszel method, the effect size is the estimated common 
+     odds ratio, up to a transformation, to get the Delta measure on 
+     the ETS delta scale. For the standardization method, the 
+     standardized P-DIF statistic is used as the measure of effect 
+     size and the classification proposed by Dorans, Schmitt and 
+     Bleistein (1992) is adopted. For logistic regression and 
+     generalized logistic regression, the effect size is the 
+     difference in nagelkerke's R^2 coefficients between the two 
+     tested models. Both classification scales of Zumbo and Thomas 
+     (1997) and Jodoign and Gierl (2001) are available. These measures
+     of effect sizes are displayed by the 'print' functions of the 
+     different methods. 
+    
+
+MINOR UPDATES
+
+  o  The functions 'selectDif' and 'dichoDif' have been updated to fix
+     a minor bug occuring when Lord or Raju method was requested: the
+     arguments 'engine', 'irtParam' and 'same.scale' were not passed
+     correctly to thes functions.
+
+  o  The examples taking a long time to run have been fixed using the
+     'Not run' approach.
+
+  o  A minor bug was fixed in the Examples section of the 
+     'mantelhaenszel' function: the definition of the data and group 
+     variable were incorrect.
+
+  o  The significance code for standardization method was corrected 
+     in the 'difStd' function.
+
+  o  The description of the package (in file DESCRIPTION) has been 
+     slightly modified.
+
+  o  The help files of the commands 'breslowDay' and 'difBD' have been
+     updated to mention that the currently implemented Breslow-Day 
+     statistic is the one given by Aguerri et al. (in press) and NOT 
+     the statistic for the test of trend in odds ratio heterogeneity 
+    (Penfield, 2003).
+
+
+
+------------------------------------
+- Changes in difR 1.1 (2009-10-27) -
+------------------------------------
+
+MINOR UPDATES
+
+  o  The output of 'itemPar2PL' function was corrected to fix a bug. 
+     The parameter estimates of the item difficulties were actually 
+     not returned as item difficulties (in the IRT sense) but as 
+     additive intercept parameters as described in the help file of 
+     the 'ltm' function of the eponymous package. Version 1.1 of 
+     difR was corrected to return the correct item difficulty 
+     estimates. Note that functions 'itemPar1PL', 'itemPar3PL' and 
+     'itemPar3PLconst' were not affected by this bug.
+
+  o  The listing of the authors was corrected in the reference manual
+     to fix a printing mistake.
+
+  o  Several R codes in the Example sections have been preceded by the
+     '#' symbol, so that they are not executed when copy-pasting the 
+     full R code from these sections. However, the R code itself 
+     remains functioning but it was not executed during the building 
+     of the difR package version 1.1. Anyone interested in seeing how
+     the command works has just to copy-paste the R code without the 
+     '#' symbol. This is mentioned in the help files by the 
+     '(remove #)' message.

@@ -1,0 +1,144 @@
+        **********************************************
+        *                                            *
+        *  Future Developments for the difR Package  *
+        *                                            *
+        **********************************************
+
+
+--------------------------------------
+- Changes in difR > 6.1 (2025-12-01) -
+--------------------------------------
+
+MAJOR UPDATES
+
+  o  To extend some functions to include the analysis of missing data.
+
+
+--------------------------------------
+- Changes in difR > 5.0 (2018-05-08) -
+--------------------------------------
+
+MAJOR UPDATES
+
+  o  To integrate the confidence intervals for the common
+     MH log-odds ratio to existing 'difMH' function.
+
+
+
+--------------------------------------
+- Changes in difR > 4.3 (2012-06-13) -
+--------------------------------------
+
+MAJOR UPDATES
+
+  o  To implement the SIBTEST method. Currently some R code
+     is available but must be checked for validity.
+
+  o  To integrate the confidence intervals for the common
+     MH log-odds ratio to existing 'difMH' function.
+
+
+--------------------------------------
+- Changes in difR > 4.2 (2012-04-01) -
+--------------------------------------
+
+MAJOR UPDATES
+
+  o  To implement the SIBTEST method. Currently some R code
+     is available but must be checked for validity.
+
+  o  To integrate the confidence intervals for the common
+     MH log-odds ratio to existing 'difMH' function.
+
+
+--------------------------------------
+- Changes in difR > 4.1 (2011-06-22) -
+--------------------------------------
+
+MAJOR UPDATES
+
+  o  To implement the SIBTEST method. Currently some R code
+     is available but must be checked for validity.
+
+  o  To add procedures for DIF identification with
+     polytomous items. => SEPARATE PACKAGE
+
+
+--------------------------------------
+- Changes in difR > 4.0 (2011-03-04) -
+--------------------------------------
+
+MAJOR UPDATES
+
+  o  To implement the SIBTEST method. Currently some R code
+     is available but must be checked for validity.
+
+  o  To add procedures for DIF identification with
+     polytomous items. => SEPARATE PACKAGE
+
+
+--------------------------------------
+- Changes in difR > 3.3 (2010-10-21) -
+--------------------------------------
+
+MAJOR UPDATES
+
+  o  To implement the SIBTEST method. Currently some R code
+     is available but must be checked for validity.
+
+  o  To implement Angoff's Delta Plot (or Transformed Item
+     Difficulties) method.
+
+  o  To add procedures for DIF identification with
+     polytomous items.
+
+
+--------------------------------------
+- Changes in difR > 3.2 (2010-10-04) -
+--------------------------------------
+
+MAJOR UPDATES
+
+  o  To implement the SIBTEST method. Currently some R code
+     is available but must be checked for validity.
+
+  o  To add procedures for DIF identification with
+     polytomous items.
+
+
+
+--------------------------------------
+- Changes in difR > 3.1 (2010-06-22) -
+--------------------------------------
+
+MAJOR UPDATES
+
+  o  To implement the SIBTEST method. Currently some R code
+     is available but must be checked for validity.
+
+
+MINOR UPDATES
+
+  o  To update the reference of Magis and al. (in press).
+
+
+
+--------------------------------------
+- Changes in difR > 3.0 (2010-04-19) -
+--------------------------------------
+
+MAJOR UPDATES
+
+  o  To implement the SIBTEST method. Currently some R code
+     is available but must be checked for validity.
+
+  o  To implement the Breslow-Day test of trend described by
+     Penfield (2003) as an alternative to the currently
+     implemented method of Aguerri et al. (in press).
+
+
+MINOR UPDATES
+
+  o  To update the reference of Magis and al. (in press).
+
+ 
