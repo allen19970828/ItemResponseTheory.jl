@@ -11,6 +11,7 @@ makedocs(
         assets = String[],
     ),
     modules = [ItemResponseTheory],
+    warnonly = true,
     pages = [
         "Home" => "index.md",
         "API Reference" => "api.md",

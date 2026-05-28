@@ -1,0 +1,13 @@
+# Julia
+*.jl.cov
+*.jl.*.cov
+*.jl.mem
+Manifest.toml
+
+# Documenter build
+docs/build/
+docs/site/
+docs/Manifest.toml
+
+# System
+.DS_Store

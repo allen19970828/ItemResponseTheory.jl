@@ -1,3 +1,6 @@
 [deps]
-Documenter = "e3017c58-1d9d-5fe3-a20d-b2c68e14fa57"
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
 ItemResponseTheory = "bf236bb1-5369-42b7-a3cf-cfce0b9abdf7"
+
+[compat]
+Documenter = "1"

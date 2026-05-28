@@ -13,8 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         version:
-          - '1.6'      # LTS version support
-          - '1.10'     # Pre-release / standard version
+          - '1.10'     # LTS version
           - '1'        # Latest stable version
         os:
           - ubuntu-latest
