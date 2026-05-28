@@ -80,11 +80,8 @@ function fit_em!(model::IRTModel, X::AbstractMatrix{Float64};
             end
         end
         
-        # 3. Compute joint densities and posteriors
         # Prior densities at nodes based on current latent trait distribution
-        prior_dens = mvnormal_pdf(theta_grid, model.mean_theta, model.cov_theta)
-        # Combine with quadrature weights
-        prior_w = prior_dens .* theta_weights
+        prior_w = mvnormal_pdf(theta_grid, model.mean_theta, model.cov_theta)
         prior_w ./= sum(prior_w) # Ensure sum to 1
         
         post = zeros(N, Q_pts)
