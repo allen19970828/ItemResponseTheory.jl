@@ -3,16 +3,16 @@
 [![Build Status](https://github.com/allenyu/ItemResponseTheory.jl/workflows/CI/badge.svg)](https://github.com/allenyu/ItemResponseTheory.jl/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A high-performance, native Julia package for multidimensional Item Response Theory (MIRT), Cognitive Diagnosis Models (CDMs), and Differential Item Functioning (DIF). 
+A high-performance, native Julia package for multidimensional Item Response Theory (MIRT) and Differential Item Functioning (DIF) analysis.
 
-By leveraging Julia’s **Multiple Dispatch** and **Zero-Cost Abstractions**, `ItemResponseTheory.jl` integrates the architectural strengths of five classic R packages (`mirt`, `TAM`, `psych`, `ltm`, and `difR`) into a single, cohesive, and blazing-fast computing environment.
+By leveraging Julia’s **Multiple Dispatch** and **Zero-Cost Abstractions**, `ItemResponseTheory.jl` integrates the architectural strengths of five classic psychometric tools (`mirt`, `TAM`, `psych`, `ltm`, and `difR`) into a single, cohesive, and blazing-fast computing environment, designed strictly and specialized exclusively for IRT applications.
 
 ---
 
 ## 🚀 Key Features
 
-* **Type Polymorphism & MHRM (mirt-inspired)**: Out-of-the-box support for Rasch, 2PL, 3PL, Graded Response (GRM), and DINA models. Features a high-dimensional **Metropolis-Hastings Robbins-Monro (MHRM)** stochastic solver to bypass the curse of dimensionality.
-* **3D Design Matrices & Q-Tensors (TAM-inspired)**: Highly flexible $A$, $B$, and $Q$ design matrices. Includes a **Q-Tensor Compiler** that flattens higher-order attribute conjunctions into flat matrix-vector products for direct BLAS/LAPACK hardware acceleration.
+* **Type Polymorphism & MHRM (mirt-inspired)**: Out-of-the-box support for Rasch, 2PL, 3PL, and Graded Response (GRM) models. Features a high-dimensional **Metropolis-Hastings Robbins-Monro (MHRM)** stochastic solver to bypass the curse of dimensionality.
+* **3D Design Matrices (TAM-inspired)**: Highly flexible $A$ and $B$ design matrices allowing generalized latent regressions, partial credit models (PCM), generalized partial credit models (GPCM), and multifaceted constraints using optimized BLAS/LAPACK.
 * **PCA Tetrachoric Initializer (psych-inspired)**: Estimates starting values using a robust Cos-Pi tetrachoric correlation matrix and PCA factor loadings to prevent EM local optima and speed up convergence.
 * **Stable MML Solvers (ltm-inspired)**: Standard Marginal Maximum Likelihood (MML) via Expectation-Maximization (EM) using Gauss-Hermite multidimensional quadrature.
 * **Downstream DIF Analysis (difR-inspired)**: Decoupled, memory-efficient post-hoc DIF testing featuring **Mantel-Haenszel** and **Logistic Regression** (Uniform & Non-Uniform) tests powered by an extremely fast native Newton-Raphson solver.
@@ -66,7 +66,7 @@ dif_results = dif_mantel_haenszel(X, groups)
 println("DIF Items Detected: ", findall(dif_results.dif_detected))
 ```
 
-To see more complex examples like **MHRM estimation** and **Q-Tensor compilation**, check the [Walkthrough Guide](file:///Users/allenyu/.gemini/antigravity-cli/brain/1a0914f3-c48b-4884-afc1-0b994ea5c62f/architecture_and_walkthrough.md).
+To see more complex examples like **MHRM estimation** and **TAM design matrix PCM configuration**, check the [Walkthrough Guide](file:///Users/allenyu/.gemini/antigravity-cli/brain/1a0914f3-c48b-4884-afc1-0b994ea5c62f/architecture_and_walkthrough.md).
 
 ---
 

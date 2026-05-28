@@ -117,36 +117,6 @@ function prob_trace(item::GradedResponseItem, θ::AbstractMatrix{Float64})
     return P
 end
 
-"""
-    prob_trace(item::DINAItem, θ::AbstractMatrix{Float64})
-
-Compute response probabilities for a DINAItem.
-`θ` is a matrix representing binary attribute patterns (N × D). Returns (N, 2) matrix.
-"""
-function prob_trace(item::DINAItem, θ::AbstractMatrix{Float64})
-    N = size(θ, 1)
-    P = zeros(N, 2)
-    q = item.q_vector
-    s = item.s
-    g = item.g
-    
-    for i in 1:N
-        # η = ∏ (α_d ^ q_d)
-        # In numerical grids, θ[i, d] represents the probability or value of attribute d
-        # For discrete attribute profile, θ[i, d] is either 0 or 1.
-        eta = 1.0
-        for d in 1:length(q)
-            if q[d] == 1
-                eta *= θ[i, d] # If θ is binary, eta is binary
-            end
-        end
-        
-        p1 = g^(1.0 - eta) * (1.0 - s)^eta
-        P[i, 1] = 1.0 - p1
-        P[i, 2] = p1
-    end
-    return P
-end
 
 # ==============================================================================
 # Quadrature Grid Generation

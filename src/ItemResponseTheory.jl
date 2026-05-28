@@ -20,13 +20,13 @@ include("dif.jl")
 
 # Export Core Types
 export AbstractIRTModel, AbstractItem, AbstractEstimationMethod
-export RaschItem, TwoPLItem, ThreePLItem, GradedResponseItem, DINAItem, IRTModel
+export RaschItem, TwoPLItem, ThreePLItem, GradedResponseItem, IRTModel
 
 # Export Math Utilities
 export logistic, prob_trace, generate_quadrature
 
 # Export TAM Design Matrices
-export TAMDesign, QTensorDesign, compile_q_tensor
+export TAMDesign
 
 # Export Initialization
 export psych_initialize!, tetrachoric_corr

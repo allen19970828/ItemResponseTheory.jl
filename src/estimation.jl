@@ -284,48 +284,6 @@ function fit_em!(model::IRTModel, X::AbstractMatrix{Float64};
                 
                 param_diff += sum(abs.(item.a .- old_a)) + sum(abs.(item.d .- old_d))
                 
-            elseif typeof(item) == DINAItem
-                old_s = item.s
-                old_g = item.g
-                
-                # DINA analytical / quick EM update
-                # Slipping s: expected count of people possessing attributes who slipped (responded 0)
-                # Guessing g: expected count of people lacking attributes who guessed correct (responded 1)
-                num_s = 0.0
-                den_s = 0.0
-                num_g = 0.0
-                den_g = 0.0
-                
-                q_vec = item.q_vector
-                
-                for q in 1:Q_pts
-                    eta = 1.0
-                    for d in 1:length(q_vec)
-                        if q_vec[d] == 1
-                            eta *= theta_grid[q, d]
-                        end
-                    end
-                    
-                    # η is 1 if attributes possessed, 0 otherwise
-                    if eta >= 0.5
-                        # Slipping: response is category 0 (index 1)
-                        num_s += r_expected[q, 1]
-                        den_s += r_expected[q, 1] + r_expected[q, 2]
-                    else
-                        # Guessing: response is category 1 (index 2)
-                        num_g += r_expected[q, 2]
-                        den_g += r_expected[q, 1] + r_expected[q, 2]
-                    end
-                end
-                
-                if item.est_s && den_s > 0.0
-                    item.s = max(0.01, min(0.6, num_s / den_s))
-                end
-                if item.est_g && den_g > 0.0
-                    item.g = max(0.01, min(0.6, num_g / den_g))
-                end
-                
-                param_diff += abs(item.s - old_s) + abs(item.g - old_g)
             end
         end
         

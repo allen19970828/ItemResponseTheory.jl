@@ -1,6 +1,6 @@
 # ItemResponseTheory.jl 開發者與貢獻者指南 (Developer Guide)
 
-歡迎來到 `ItemResponseTheory.jl` 的開發者世界！本文件旨在幫助您快速理解套件的底層設計架構，並引導您如何擴充新型別、新演算法或加入新的計量模組。
+歡迎來到 `ItemResponseTheory.jl` 的開發者世界！本文件旨在幫助您快速理解套件的底層設計架構，並引導您如何擴充新型別、新演算法或加入新的心理計量模組。
 
 ---
 
@@ -10,19 +10,19 @@
 
 ```
 src/ItemResponseTheory.jl (進入點)
-   ├── src/types.jl            (1. 最底層：定義抽象與具體型別)
+   ├── src/types.jl            (1. 最底層：定義抽象與具體 IRT 型別)
    ├── src/math.jl             (2. 數學層：定義反應機率 prob_trace 與數值網格)
-   ├── src/design_matrix.jl    (3. 結構層：TAM 設計矩陣與 Q-Tensor 編譯器)
+   ├── src/design_matrix.jl    (3. 結構層：TAM 設計矩陣系統)
    ├── src/initialization.jl   (4. 加速層：四分相關與 PCA 參數初始化)
    ├── src/estimation.jl       (5. 求解層：EM 與 MHRM 核心參數估計)
    └── src/dif.jl              (6. 應用層：Mantel-Haenszel 與邏輯斯 DIF 檢定)
 ```
 
-* **規則**：修改低層模組（如 `types.jl` 或 `math.jl`）時，務必確保其向下相容性，因為高層的估計引擎（`estimation.jl`）高度依賴底層型別的結構。
+* **重要守則**：修改低層模組（如 `types.jl` 或 `math.jl`）時，務必確保其向下相容性，因為高層的估計引擎（`estimation.jl`）高度依賴底層型別的結構。
 
 ---
 
-## 2. 如何擴充一種新的試題模型 (Adding a New Item Model)
+## 2. 如何擴充一種新的 IRT 試題模型 (Adding a New Item Model)
 
 得益於 Julia 的 **多重派發（Multiple Dispatch）** 機制，在套件中新增一種試題模型極為簡單，完全不需要修改核心 EM 迴圈的邏輯。
 
@@ -81,19 +81,7 @@ end
 
 ---
 
-## 3. 如何擴充 Q-Tensor（張量）的高階結構
-
-在 `src/design_matrix.jl` 中，我們提供了高階認知診斷張量 `QTensorDesign`。
-
-如果您希望擴充更複雜的屬性交互作用模型（例如帶有三階交互作用的 Log-Linear CDM）：
-1. 擴充 `QTensorDesign` 結構體中的 `Q_tensor` 維度至五維 `Array{Float64, 5}`。
-2. 在 `prob_trace(design::QTensorDesign, α)` 中，加入第三階的張量縮併（Tensor Contraction）循環：
-   $$\sum_{d_1, d_2, d_3} \lambda_{i,k,d_1,d_2,d_3} \cdot q_{i,k,d_1,d_2,d_3} \cdot \alpha_{d_1}\alpha_{d_2}\alpha_{d_3}$$
-3. 修改 `compile_q_tensor` 函數，將新的三階參數映射加入到扁平化的參數向量 $\xi$ 與設計矩陣 $A$ 中，編譯器將會自動處理底層的 BLAS 矩陣加速。
-
----
-
-## 4. 如何擴充新的估計求解器 (Estimation Solvers)
+## 3. 如何擴充新的估計求解器 (Estimation Solvers)
 
 如果您希望加入貝氏估計法（如 MCMC / Gibbs Sampler）：
 1. 在 `src/types.jl` 中定義繼承自 `AbstractEstimationMethod` 的型別，例如 `struct MCMC <: AbstractEstimationMethod end`。
@@ -108,7 +96,7 @@ end
 
 ---
 
-## 5. 本地測試與貢獻工作流
+## 4. 本地測試與貢獻工作流
 
 在提交您的 Pull Request 之前，請務必在本地執行單元測試：
 

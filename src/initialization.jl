@@ -201,14 +201,7 @@ function psych_initialize!(model::IRTModel, X::AbstractMatrix{Float64})
             # Ensure sorting is correct (descending order)
             sort!(item.d, rev=true)
             
-        elseif typeof(item) == DINAItem
-            # DINA: set default guessing and slipping to 0.2
-            if item.est_s
-                item.s = 0.2
-            end
-            if item.est_g
-                item.g = 0.2
-            end
+
         end
     end
 end

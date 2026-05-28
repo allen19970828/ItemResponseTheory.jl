@@ -120,31 +120,6 @@ mutable struct GradedResponseItem <: AbstractItem
     end
 end
 
-"""
-    DINAItem
-
-Deterministic Input, Noisy "And" (DINA) cognitive diagnosis item.
-Requires a specific set of binary attributes represented by a Q-vector (length D).
-`P(X = 1 | α) = g^(1 - η) * (1 - s)^η`
-where `η = ∏ (α_d ^ q_d)` is 1 if the examinee possesses all required attributes, and 0 otherwise.
-`g` is the guessing probability, and `s` is the slipping probability.
-"""
-mutable struct DINAItem <: AbstractItem
-    q_vector::Vector{Int}  # Binary attribute requirements (length D)
-    s::Float64             # Slipping parameter
-    g::Float64             # Guessing parameter
-    est_s::Bool
-    est_g::Bool
-    lbound_s::Float64
-    ubound_s::Float64
-    lbound_g::Float64
-    ubound_g::Float64
-
-    function DINAItem(q_vector::Vector{Int}; s=0.2, g=0.2, est_s=true, est_g=true,
-                      lbound_s=0.0, ubound_s=0.9, lbound_g=0.0, ubound_g=0.9)
-        new(q_vector, s, g, est_s, est_g, lbound_s, ubound_s, lbound_g, ubound_g)
-    end
-end
 
 # ==============================================================================
 # Main IRT Model Struct
